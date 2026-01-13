@@ -35,6 +35,9 @@ wheels/
 
 # IDE
 .vscode/
+!.vscode/settings.json
+.cursor/
+!.cursor/settings.json
 .idea/
 *.swp
 *.swo

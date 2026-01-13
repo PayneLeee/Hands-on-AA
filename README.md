@@ -36,6 +36,19 @@ conda create -n hands-on-aai python=3.10 -y
 conda activate hands-on-aai
 ```
 
+**注意**: 建议使用 `hands-on-aai` 作为环境名称。如果需要在终端中手动激活，可以运行：
+
+```powershell
+# PowerShell (Windows)
+.\activate_env.ps1
+
+# 或使用批处理文件 (Windows)
+activate_env.bat
+
+# 或直接使用conda命令 (所有平台)
+conda activate hands-on-aai
+```
+
 2. **安装PyTorch (根据您的CUDA版本选择)**
 
 ```bash
@@ -108,7 +121,27 @@ jupyter notebook
 
 ### API密钥配置
 
-部分章节需要使用API密钥（如DeepSeek、OpenAI等），请创建 `.env` 文件并添加：
+部分章节需要使用API密钥（如DeepSeek、OpenAI等）。本项目支持两种配置方式：
+
+**方式1: 使用配置文件（推荐）**
+
+创建 `HandsOn/config.json` 文件（可参考 `HandsOn/config.json.example`）：
+
+```json
+{
+  "openai": {
+    "api_key": "your_api_key_here",
+    "base_url": "https://api.openai.com/v1",
+    "model": "gpt-4o-mini"
+  }
+}
+```
+
+详细配置方法请参考 `HandsOn/docs/API配置使用指南.md`。
+
+**方式2: 使用环境变量**
+
+创建 `.env` 文件并添加：
 
 ```env
 # DeepSeek API (示例)
@@ -180,6 +213,59 @@ Hands-on-aai/
    - 结合所学知识，构建自己的智能体应用
    - 参与开源项目贡献
    - 分享学习心得和经验
+
+## ⚙️ 环境配置
+
+### 完整配置指南
+
+详细的环境配置说明请参考：
+
+- **[环境配置完整指南](HandsOn/docs/环境配置完整指南.md)** - 完整的环境配置步骤（推荐新用户阅读）
+- [API配置使用指南](HandsOn/docs/API配置使用指南.md) - 详细的API配置系统说明（包含设计理念、核心组件、使用方法等）
+
+### IDE配置（可选）
+
+如果您使用 Cursor 或 VS Code，可以配置IDE自动使用正确的Python解释器。详细配置方法请参考 [环境配置完整指南](HandsOn/docs/环境配置完整指南.md#ide配置)。
+
+### 验证环境配置
+
+运行以下命令验证环境是否正确配置：
+
+```python
+import sys
+import torch
+print(f"Python路径: {sys.executable}")
+print(f"PyTorch版本: {torch.__version__}")
+print(f"CUDA可用: {torch.cuda.is_available()}")
+```
+
+### 激活环境
+
+根据您使用的平台和工具：
+
+**使用 Conda:**
+```bash
+conda activate hands-on-aai
+```
+
+**使用 venv:**
+```bash
+# Windows
+venv\Scripts\activate
+# Linux/Mac
+source venv/bin/activate
+```
+
+**使用项目提供的脚本（Windows）:**
+```powershell
+# PowerShell
+.\activate_env.ps1
+
+# CMD
+activate_env.bat
+```
+
+> **注意**: 如果使用项目提供的激活脚本，请先根据您的conda安装路径修改脚本中的路径。详见 [环境配置完整指南](HandsOn/docs/环境配置完整指南.md#ide配置)。
 
 ## 🔧 常见问题
 
